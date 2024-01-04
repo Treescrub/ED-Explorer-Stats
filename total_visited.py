@@ -5,10 +5,10 @@ import os
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("saves_path", type=str, help="The path to the ED saved data")
+    parser.add_argument("--saves_path", type=str, default="%USERPROFILE%/Saved Games/Frontier Developments/Elite Dangerous", help="The path to the ED saved data")
     
     args = parser.parse_args()
-    saves_path = args.saves_path
+    saves_path = os.path.expandvars(args.saves_path)
 
     journal_paths = []
 
