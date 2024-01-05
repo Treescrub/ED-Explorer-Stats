@@ -36,7 +36,7 @@ def get_systems_visited(journal_path):
                 continue
             if event["ScanType"] != "AutoScan":
                 continue
-            if event["BodyName"] != event["StarSystem"]:
+            if not event["BodyName"].startswith(event["StarSystem"]):
                 continue
             
             visited_systems.add(event["StarSystem"])
