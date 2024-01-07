@@ -12,11 +12,7 @@ def main():
     visited_systems = set()
 
     for event in read_journals.read_events(saves_path):
-        if event["event"] != "Scan":
-            continue
-        if event["ScanType"] != "AutoScan":
-            continue
-        if not event["BodyName"].startswith(event["StarSystem"]):
+        if event["event"] != "Scan" and event["event"] != "Location" and event["event"] != "FSDJump":
             continue
             
         visited_systems.add(event["StarSystem"])
