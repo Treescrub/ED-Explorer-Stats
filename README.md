@@ -6,4 +6,5 @@ Simple scripts to parse player journals and display interesting exploring stats 
 * Scanned star count by type
 * Largest/smallest stellar objects by type
 * Orbital period
+* Rotational period
 * Most planets/moons/stars in one system
