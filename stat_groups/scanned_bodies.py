@@ -6,12 +6,14 @@ def new_collector():
 
 class ScannedBodies(collector.Collector):
     bodies_scanned = None
-    body_classes_scanned = None
+    planet_classes_scanned = None
+    star_types_scanned = None
     total = 0
     
     def __init__(self):
-        bodies_scanned = set()
-        body_classes_scanned = {}
+        self.bodies_scanned = set()
+        self.planet_classes_scanned = {}
+        self.star_types_scanned = {}
 
     
     def process_event(self, event):
@@ -19,29 +21,38 @@ class ScannedBodies(collector.Collector):
             return
         if "PlanetClass" not in event and "StarType" not in event:
             return
-        if event["BodyName"] in bodies_scanned:
+        if event["BodyName"] in self.bodies_scanned:
             return
         
-        bodies_scanned.add(event["BodyName"])
-        total += 1
-        
-        body_class = None
+        self.bodies_scanned.add(event["BodyName"])
+        self.total += 1
         
         if "PlanetClass" in event:
-            body_class = event["PlanetClass"]
+            planet_class = event["PlanetClass"]
+            
+            if planet_class not in self.planet_classes_scanned:
+                self.planet_classes_scanned[planet_class] = 0
+            
+            self.planet_classes_scanned[planet_class] += 1
         elif "StarType" in event:
-            body_class = event["StarType"]
-        
-        if body_class not in body_classes_scanned:
-            body_classes_scanned[body_class] = 0
-        
-        body_classes_scanned[body_class] += 1
+            star_type = event["StarType"]
+            
+            if star_type not in self.star_types_scanned:
+                self.star_types_scanned[star_type] = 0
+            
+            self.star_types_scanned[star_type] += 1
     
     
     def get_output(self):
-        output = "Total: " + str(total) + "\n"
+        output = "Scanned bodies\n"
+        output += "\tTotal: " + str(self.total) + "\n"
     
-        for body_class in body_classes_scanned:
-            output += body_class + ": " + str(body_classes_scanned[body_class])
+        output += "\n\tStars:\n"
+        for star_type in self.star_types_scanned:
+            output += "\t" + star_type + ": " + str(self.star_types_scanned[star_type]) + "\n"
+            
+        output += "\n\tPlanets:\n"
+        for planet_class in self.planet_classes_scanned:
+            output += "\t" + planet_class + ": " + str(self.planet_classes_scanned[planet_class]) + "\n"
         
         return output

@@ -16,8 +16,18 @@ def main():
     args = parser.parse_args()
     saves_path = os.path.expandvars(args.saves_path)
     
+    collectors = {
+        "scanned_bodies": scanned_bodies.new_collector(),
+        "visited_systems": visited_systems.new_collector(),
+    }
+    
     for event in read_journals.read_events(saves_path):
-        pass
+        for key, collector in collectors.items():
+            collector.process_event(event)
+    
+    for key, collector in collectors.items():
+        print(collector.get_output())
+        
     
 if __name__ == "__main__":
     main()
