@@ -9,9 +9,7 @@ PROGRAM_NAME = "ED Exploration Stats"
 VERSION = "0.1.0"
 
 def main():
-    parser = argparse.ArgumentParser(prog=PROGRAM_NAME)
-    parser.add_argument("--saves_path", type=str, default="%USERPROFILE%/Saved Games/Frontier Developments/Elite Dangerous", help="path to the ED saved data")
-    parser.add_argument("--version", action="version", version=f"{PROGRAM_NAME} v{VERSION}")
+    parser = build_arg_parser()
     
     args = parser.parse_args()
     saves_path = os.path.expandvars(args.saves_path)
@@ -27,7 +25,15 @@ def main():
     
     for key, collector in collectors.items():
         print(collector.get_output())
-        
+
+
+def build_arg_parser():
+    parser = argparse.ArgumentParser(prog=PROGRAM_NAME)
+    parser.add_argument("--saves_path", type=str, default="%USERPROFILE%/Saved Games/Frontier Developments/Elite Dangerous", help="path to the ED saved data")
+    parser.add_argument("--version", action="version", version=f"{PROGRAM_NAME} v{VERSION}")
+    
+    return parser
+
     
 if __name__ == "__main__":
     main()
