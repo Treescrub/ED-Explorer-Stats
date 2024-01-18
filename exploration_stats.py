@@ -14,7 +14,7 @@ def main():
     
     args = parser.parse_args()
     
-    if "stat_group" not in args:
+    if not args.stat_group:
         run_main()
     else:
         stat_groups_lookup = build_stat_groups_dict()
