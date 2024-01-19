@@ -10,3 +10,4 @@ Simple scripts to parse player journals and display interesting exploring stats 
 * Most planets/moons/stars in one system
 * Gravity/mass
 * Radius
+* Age
