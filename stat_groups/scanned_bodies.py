@@ -1,5 +1,6 @@
 from . import collector
 
+
 def new_collector():
     return ScannedBodies()
 
@@ -52,11 +53,11 @@ class ScannedBodies(collector.Collector):
         output += "\tTotal: " + str(self.total) + "\n"
     
         output += "\n\tStars:\n"
-        for star_type in self.star_types_scanned:
+        for star_type in sorted(self.star_types_scanned):
             output += "\t" + star_type + ": " + str(self.star_types_scanned[star_type]) + "\n"
             
         output += "\n\tPlanets:\n"
-        for planet_class in self.planet_classes_scanned:
+        for planet_class in sorted(self.planet_classes_scanned):
             output += "\t" + planet_class + ": " + str(self.planet_classes_scanned[planet_class]) + "\n"
         
         return output
