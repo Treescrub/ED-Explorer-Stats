@@ -4,6 +4,10 @@ def new_collector():
     return ScannedBodies()
 
 
+def get_description():
+    return "Counts of all scanned stellar bodies"
+
+
 class ScannedBodies(collector.Collector):
     bodies_scanned = None
     planet_classes_scanned = None

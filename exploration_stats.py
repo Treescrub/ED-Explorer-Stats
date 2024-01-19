@@ -41,7 +41,10 @@ def invalid_stat_group(name):
 
 
 def run_main():
-    pass
+    for module in stat_groups.get_stat_group_modules():
+        name = module.__name__[module.__name__.rfind(".")+1:]
+        
+        print(name + " - " + module.get_description())
 
 
 def build_arg_parser():

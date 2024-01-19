@@ -4,6 +4,10 @@ def new_collector():
     return VisitedSystems()
 
 
+def get_description():
+    return "Total systems visited"
+
+
 class VisitedSystems(collector.Collector):
     visited_systems = None
 
