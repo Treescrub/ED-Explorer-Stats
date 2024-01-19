@@ -41,6 +41,10 @@ def invalid_stat_group(name):
 
 
 def run_main():
+    print_stat_groups()
+
+
+def print_stat_groups():
     for module in stat_groups.get_stat_group_modules():
         name = module.__name__[module.__name__.rfind(".")+1:]
         
