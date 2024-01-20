@@ -11,3 +11,6 @@ Simple scripts to parse player journals and display interesting exploring stats 
 * Gravity/mass
 * Radius
 * Age
+
+## Planned Features
+* Colored text (probably Colorama)
