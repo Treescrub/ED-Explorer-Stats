@@ -17,14 +17,14 @@ def main():
         run_main()
     else:
         stat_group_name = args.stat_group
-        if stat_group_name not in stat_groups.get_stat_group_modules():
+        if stat_group_name not in stat_groups.get_module_names():
             invalid_stat_group(stat_group_name)
         else:
             run_stat_group(args)
 
 
 def run_stat_group(args):
-    module = get_stat_group_module(args.stat_group)
+    module = stat_groups.get_module(args.stat_group)
     collector = module.new_collector()
     
     saves_path = os.path.expandvars(args.saves_path)
@@ -43,12 +43,8 @@ def run_main():
 
 
 def print_stat_groups():
-    for name in stat_groups.get_stat_group_modules(): 
-        print(name + " - " + get_stat_group_module(name).get_description())
-
-
-def get_stat_group_module(name):
-    return stat_groups.__dict__[name]
+    for name in stat_groups.get_module_names(): 
+        print(name + " - " + stat_groups.get_module(name).get_description())
 
 
 def build_arg_parser():

@@ -4,5 +4,9 @@ __all__ = [
     "most_bodies",
 ]
 
-def get_stat_group_modules():
+def get_module_names():
     return __all__
+
+
+def get_module(name):
+    return globals()[name]
