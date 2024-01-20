@@ -24,7 +24,7 @@ def main():
 
 
 def run_stat_group(args):
-    module = stat_groups.__dict__[args.stat_group]
+    module = get_stat_group_module(args.stat_group)
     collector = module.new_collector()
     
     saves_path = os.path.expandvars(args.saves_path)
@@ -44,7 +44,11 @@ def run_main():
 
 def print_stat_groups():
     for name in stat_groups.get_stat_group_modules(): 
-        print(name + " - " + stat_groups.__dict__[name].get_description())
+        print(name + " - " + get_stat_group_module(name).get_description())
+
+
+def get_stat_group_module(name):
+    return stat_groups.__dict__[name]
 
 
 def build_arg_parser():
