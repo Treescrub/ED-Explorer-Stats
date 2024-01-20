@@ -2,9 +2,8 @@ import argparse
 import os
 import read_journals
 
-from stat_groups import scanned_bodies
-from stat_groups import visited_systems
 import stat_groups
+from stat_groups import *
 
 PROGRAM_NAME = "ED Exploration Stats"
 VERSION = "0.1.0"
@@ -17,16 +16,15 @@ def main():
     if not args.stat_group:
         run_main()
     else:
-        stat_groups_lookup = build_stat_groups_dict()
         stat_group_name = args.stat_group
-        if stat_group_name not in stat_groups_lookup:
+        if stat_group_name not in stat_groups.get_stat_group_modules():
             invalid_stat_group(stat_group_name)
         else:
-            run_stat_group(args, stat_groups_lookup)
+            run_stat_group(args)
 
 
-def run_stat_group(args, stat_groups_lookup):
-    module = stat_groups_lookup[args.stat_group]
+def run_stat_group(args):
+    module = stat_groups.__dict__[args.stat_group]
     collector = module.new_collector()
     
     saves_path = os.path.expandvars(args.saves_path)
@@ -45,10 +43,8 @@ def run_main():
 
 
 def print_stat_groups():
-    for module in stat_groups.get_stat_group_modules():
-        name = module.__name__[module.__name__.rfind(".")+1:]
-        
-        print(name + " - " + module.get_description())
+    for name in stat_groups.get_stat_group_modules(): 
+        print(name + " - " + stat_groups.__dict__[name].get_description())
 
 
 def build_arg_parser():
@@ -62,19 +58,6 @@ def build_arg_parser():
     visited_systems_parser = subparsers.add_parser("visited_systems")
     
     return parser
-
-
-def build_stat_groups_dict():
-    stat_group_names = {}
-    modules = stat_groups.get_stat_group_modules()
-    
-    for module in modules:
-        index = module.__name__.rfind(".")
-        name = module.__name__[index+1:]
-        
-        stat_group_names[name] = module
-    
-    return stat_group_names
 
     
 if __name__ == "__main__":
