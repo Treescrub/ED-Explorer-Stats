@@ -8,6 +8,10 @@ def get_description():
     return "System with the most stellar objects"
 
 
+def setup_parser(parser):
+    pass
+
+
 class MostBodies(collector.Collector):
     best_system_name = None
     best_body_count = None

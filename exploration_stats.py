@@ -54,9 +54,10 @@ def build_arg_parser():
     
     subparsers = parser.add_subparsers(dest="stat_group")
     
-    scanned_bodies_parser = subparsers.add_parser("scanned_bodies")
-    visited_systems_parser = subparsers.add_parser("visited_systems")
-    most_bodies_parser = subparsers.add_parser("most_bodies")
+    for name in stat_groups.get_module_names():
+        subparser = subparsers.add_parser(name)
+        
+        stat_groups.get_module(name).setup_parser(subparser)
     
     return parser
 

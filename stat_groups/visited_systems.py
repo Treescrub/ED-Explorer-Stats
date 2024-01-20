@@ -8,6 +8,10 @@ def get_description():
     return "Total systems visited"
 
 
+def setup_parser(parser):
+    pass
+
+
 class VisitedSystems(collector.Collector):
     visited_systems = None
 

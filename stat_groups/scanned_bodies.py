@@ -9,6 +9,10 @@ def get_description():
     return "Counts of all scanned stellar bodies"
 
 
+def setup_parser(parser):
+    pass
+
+
 class ScannedBodies(collector.Collector):
     bodies_scanned = None
     planet_classes_scanned = None
