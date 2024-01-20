@@ -3,7 +3,6 @@
 Simple scripts to parse player journals and display interesting exploring stats for the game Elite Dangerous
 
 ### Planned Stats
-* Scanned star count by type
 * Largest/smallest stellar objects by type
 * Orbital period
 * Rotational period
@@ -14,3 +13,6 @@ Simple scripts to parse player journals and display interesting exploring stats 
 
 ## Planned Features
 * Colored text (probably Colorama)
+
+## Todo
+* scanned_bodies sections based on main sequence, degenerate stars, etc.
