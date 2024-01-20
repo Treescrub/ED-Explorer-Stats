@@ -19,10 +19,41 @@ class ScannedBodies(collector.Collector):
     star_types_scanned = None
     total = 0
     
+    _star_type_names = {
+        "N": "Neutron star",
+        "WN": "Wolf-Rayet star (WN)",
+        "TTS": "T Tauri star",
+        "T": "T brown dwarf",
+        "L": "L brown dwarf",
+        "Y": "Y brown dwarf",
+        "O": "O star",
+        "B": "B star",
+        "A": "A star",
+        "F": "F star",
+        "G": "G star",
+        "K": "K star",
+        "K_OrangeGiant": "K orange giant star",
+        "M": "M star",
+        "M_RedGiant": "M red giant star",
+        "M_RedSuperGiant": "M red supergiant star",
+        "H": "Black hole",
+        "SupermassiveBlackHole": "Supermassive black hole",
+    }
+    
     def __init__(self):
         self.bodies_scanned = set()
         self.planet_classes_scanned = {}
         self.star_types_scanned = {}
+
+
+    def get_star_type_name(self, type):
+        if type[0] == "D":
+            return f"White dwarf ({type})"
+        
+        if type in self._star_type_names:
+            return self._star_type_names[type]
+        else:
+            return type
 
     
     def process_event(self, event):
@@ -44,7 +75,7 @@ class ScannedBodies(collector.Collector):
             
             self.planet_classes_scanned[planet_class] += 1
         elif "StarType" in event:
-            star_type = event["StarType"]
+            star_type = self.get_star_type_name(event["StarType"])
             
             if star_type not in self.star_types_scanned:
                 self.star_types_scanned[star_type] = 0
