@@ -56,6 +56,7 @@ def build_arg_parser():
     
     scanned_bodies_parser = subparsers.add_parser("scanned_bodies")
     visited_systems_parser = subparsers.add_parser("visited_systems")
+    most_bodies_parser = subparsers.add_parser("most_bodies")
     
     return parser
 
