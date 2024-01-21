@@ -8,6 +8,7 @@ from stat_groups import *
 PROGRAM_NAME = "ED Exploration Stats"
 VERSION = "0.1.0"
 
+
 def main():
     parser = build_arg_parser()
     
@@ -33,6 +34,7 @@ def run_stat_group(args):
         collector.process_event(event)
     
     print(collector.get_output())
+
 
 def invalid_stat_group(name):
     print(f"Invalid stat group '{name}', probably missing in package init file")

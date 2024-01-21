@@ -1,6 +1,7 @@
 import json
 import os
 
+
 def read_events(path):
     journal_paths = []
 
@@ -12,6 +13,7 @@ def read_events(path):
         
         for event in _read_journal(entry_path):
             yield event
+
 
 def _read_journal(path):
     with open(path) as journal_file:

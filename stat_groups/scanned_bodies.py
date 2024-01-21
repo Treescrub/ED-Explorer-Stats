@@ -40,6 +40,7 @@ class ScannedBodies(collector.Collector):
         "SupermassiveBlackHole": "Supermassive black hole",
     }
     
+    
     def __init__(self):
         self.bodies_scanned = set()
         self.planet_classes_scanned = {}

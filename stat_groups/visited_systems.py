@@ -18,11 +18,13 @@ class VisitedSystems(collector.Collector):
     def __init__(self):
         self.visited_systems = set()
 
+
     def process_event(self, event):
         if event["event"] != "Scan" and event["event"] != "Location" and event["event"] != "FSDJump":
             return
             
         self.visited_systems.add(event["StarSystem"])
+    
     
     def get_output(self):
         output = "Visited systems\n"
