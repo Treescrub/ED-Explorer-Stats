@@ -2,6 +2,7 @@ __all__ = [
     "scanned_bodies",
     "visited_systems",
     "most_bodies",
+    "orbital_period",
 ]
 
 
