@@ -46,7 +46,7 @@ def run_main():
 
 def print_stat_groups():
     for name in stat_groups.get_module_names(): 
-        print(name + " - " + stat_groups.get_module(name).get_description())
+        print(f"{name} - {stat_groups.get_module(name).get_description()}")
 
 
 def build_arg_parser():

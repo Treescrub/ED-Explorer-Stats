@@ -28,6 +28,6 @@ class VisitedSystems(collector.Collector):
     
     def get_output(self):
         output = "Visited systems\n"
-        output += "\tTotal visited systems: " + str(len(self.visited_systems))
+        output += f"\tTotal visited systems: {len(self.visited_systems)}"
         
         return output

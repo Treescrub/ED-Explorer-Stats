@@ -86,14 +86,14 @@ class ScannedBodies(collector.Collector):
     
     def get_output(self):
         output = "Scanned bodies\n"
-        output += "\tTotal: " + str(self.total) + "\n"
+        output += f"\tTotal: {self.total}\n"
     
         output += "\n\tStars:\n"
         for star_type in sorted(self.star_types_scanned):
-            output += "\t" + star_type + ": " + str(self.star_types_scanned[star_type]) + "\n"
+            output += f"\t{star_type}: {self.star_types_scanned[star_type]}\n"
             
         output += "\n\tPlanets:\n"
         for planet_class in sorted(self.planet_classes_scanned):
-            output += "\t" + planet_class + ": " + str(self.planet_classes_scanned[planet_class]) + "\n"
+            output += f"\t{planet_class}: {self.planet_classes_scanned[planet_class]}\n"
         
         return output
