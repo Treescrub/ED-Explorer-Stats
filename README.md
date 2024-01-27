@@ -3,12 +3,8 @@
 Simple scripts to parse player journals and display interesting exploring stats for the game Elite Dangerous
 
 ### Planned Stats
-* Largest/smallest stellar objects by type
-* Orbital period
 * Rotational period
-* Most planets/moons/stars in one system
 * Gravity/mass
-* Radius
 * Age
 
 ## Planned Features
