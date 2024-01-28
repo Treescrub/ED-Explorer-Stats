@@ -6,7 +6,7 @@ def new_collector():
 
 
 def get_description():
-    return "Objects with notable orbital periods"
+    return "Objects with notable radius"
 
 
 def setup_parser(parser):
