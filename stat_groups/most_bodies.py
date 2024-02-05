@@ -17,6 +17,8 @@ class MostBodies(collector.Collector):
     best_body_count = None
 
     def __init__(self):
+        super().__init__()
+        
         self.best_body_count = 0
 
 
@@ -33,6 +35,6 @@ class MostBodies(collector.Collector):
     
     
     def get_output(self):
-        output = f"Most bodies: {self.best_body_count} at system {self.best_system_name}"
+        self.add_line(f"Most bodies: {self.best_body_count} at system {self.best_system_name}")
         
-        return output
+        return self._output

@@ -22,19 +22,11 @@ class ScannedBodies(collector.Collector):
     
     
     def __init__(self):
+        super().__init__()
+        
         self.bodies_scanned = set()
         self.planet_classes_scanned = {}
         self.star_types_scanned = {}
-
-
-    def get_star_type_name(self, type):
-        if type[0] == "D":
-            return f"White dwarf ({type})"
-        
-        if type in self._star_type_names:
-            return self._star_type_names[type]
-        else:
-            return type
 
     
     def process_event(self, event):
@@ -74,40 +66,40 @@ class ScannedBodies(collector.Collector):
     
     
     def get_output(self):
-        output = "Scanned bodies\n\n"
-        output += f"Total: {self.total}\n\n\n"
+        self.add_line("Scanned bodies\n")
+        self.add_line(f"Total: {self.total}\n")
         
-        output += "Stellar remnants:\n\n"
+        self.add_line("Stellar remnants:")
         stellar_remnant_names = self.get_stellar_remnant_names()
         for name in sorted(stellar_remnant_names):
             type = stellar_remnant_names[name]
             count = self.star_types_scanned.get(type, 0)
-            output += f"\t{name}: {count}\n"
+            self.add_line(f"\t{name}: {count}")
             
             if type in self.star_types_scanned:
                 del self.star_types_scanned[type]
         
-        output += "\nMain sequence stars:\n\n"
+        self.add_line("Main sequence stars:")
         for type in ["O", "B", "A", "F", "G", "K", "M"]:
-            output += f"\t{type} star: {self.star_types_scanned.get(type, 0)}\n"
+            self.add_line(f"\t{type} star: {self.star_types_scanned.get(type, 0)}")
             
             if type in self.star_types_scanned:
                 del self.star_types_scanned[type]
         
-        output += "\nDwarf stars:\n\n"
+        self.add_line("Dwarf stars:")
         for type in ["Y", "T", "L"]:
-            output += f"\t{type} brown dwarf: {self.star_types_scanned.get(type, 0)}\n"
+            self.add_line(f"\t{type} brown dwarf: {self.star_types_scanned.get(type, 0)}")
             
             if type in self.star_types_scanned:
                 del self.star_types_scanned[type]
         
-        output += "\nOther:\n\n"
+        self.add_line("Other:")
         for type in sorted(self.star_types_scanned):
             name = stellar_info.type_to_name(type)
-            output += f"\t{name}: {self.star_types_scanned[type]}\n"
+            self.add_line(f"\t{name}: {self.star_types_scanned[type]}")
         
-        output += "\nPlanets:\n"
+        self.add_line("Planets:")
         for planet_class in sorted(self.planet_classes_scanned):
-            output += f"\t{planet_class}: {self.planet_classes_scanned[planet_class]}\n"
+            self.add_line(f"\t{planet_class}: {self.planet_classes_scanned[planet_class]}")
         
-        return output
+        return self._output

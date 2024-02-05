@@ -22,6 +22,8 @@ class Radius(collector.Collector):
     lowest_radius = None
 
     def __init__(self):
+        super().__init__()
+        
         self.highest_radius = 0
         self.lowest_radius = float("inf")
 
@@ -47,8 +49,8 @@ class Radius(collector.Collector):
     
     
     def get_output(self):
-        output = "Object radius\n"
-        output += f"\tHighest: {self.highest_radius}m with object {self.highest_object_name} in system {self.highest_system_name}\n"
-        output += f"\tLowest: {self.lowest_radius}m with object {self.lowest_object_name} in system {self.lowest_system_name}"
+        self.add_line("Object radius")
+        self.add_line(f"\tHighest: {self.highest_radius}m with object {self.highest_object_name} in system {self.highest_system_name}")
+        self.add_line(f"\tLowest: {self.lowest_radius}m with object {self.lowest_object_name} in system {self.lowest_system_name}")
         
-        return output
+        return self._output

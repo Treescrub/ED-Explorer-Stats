@@ -22,6 +22,8 @@ class OrbitalPeriod(collector.Collector):
     lowest_orbital_period = None
 
     def __init__(self):
+        super().__init__()
+        
         self.highest_orbital_period = 0
         self.lowest_orbital_period = float("inf")
 
@@ -50,11 +52,11 @@ class OrbitalPeriod(collector.Collector):
         highest_formatted = self.format_period(self.highest_orbital_period)
         lowest_formatted = self.format_period(self.lowest_orbital_period)
     
-        output = "Orbital period\n"
-        output += f"\tHighest: {highest_formatted} with object {self.highest_object_name} in system {self.highest_system_name}\n"
-        output += f"\tLowest: {lowest_formatted} with object {self.lowest_object_name} in system {self.lowest_system_name}"
+        self.add_line("Orbital period")
+        self.add_line(f"\tHighest: {highest_formatted} with object {self.highest_object_name} in system {self.highest_system_name}")
+        self.add_line(f"\tLowest: {lowest_formatted} with object {self.lowest_object_name} in system {self.lowest_system_name}")
         
-        return output
+        return self._output
     
     
     def format_period(self, period):

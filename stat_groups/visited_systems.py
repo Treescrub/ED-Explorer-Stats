@@ -16,6 +16,8 @@ class VisitedSystems(collector.Collector):
     visited_systems = None
 
     def __init__(self):
+        super().__init__()
+        
         self.visited_systems = set()
 
 
@@ -27,7 +29,7 @@ class VisitedSystems(collector.Collector):
     
     
     def get_output(self):
-        output = "Visited systems\n"
-        output += f"\tTotal visited systems: {len(self.visited_systems)}"
+        self.add_line("Visited systems")
+        self.add_line(f"\tTotal visited systems: {len(self.visited_systems)}")
         
-        return output
+        return self._output
