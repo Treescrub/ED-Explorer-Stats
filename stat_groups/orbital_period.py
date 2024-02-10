@@ -1,5 +1,6 @@
 from . import collector
 import datetime
+import stellar_info
 
 def new_collector():
     return OrbitalPeriod()
@@ -14,18 +15,14 @@ def setup_parser(parser):
 
 
 class OrbitalPeriod(collector.Collector):
-    highest_object_name = None
-    highest_system_name = None
-    highest_orbital_period = None
-    lowest_object_name = None
-    lowest_system_name = None
-    lowest_orbital_period = None
+    notable_stars = None
+    notable_bodies = None
 
     def __init__(self):
         super().__init__()
         
-        self.highest_orbital_period = 0
-        self.lowest_orbital_period = float("inf")
+        self.notable_stars = {}
+        self.notable_bodies = {}
 
 
     def process_event(self, event):
@@ -35,28 +32,86 @@ class OrbitalPeriod(collector.Collector):
             return
         
         orbital_period = event["OrbitalPeriod"]
-        object_name = event["BodyName"]
         system_name = event["StarSystem"]
+        object_name = self.shorten_body_name(event["BodyName"], system_name)
         
-        if orbital_period > self.highest_orbital_period:
-            self.highest_object_name = object_name
-            self.highest_system_name = system_name
-            self.highest_orbital_period = orbital_period
-        if orbital_period < self.lowest_orbital_period:
-            self.lowest_object_name = object_name
-            self.lowest_system_name = system_name
-            self.lowest_orbital_period = orbital_period
-    
+        info = {
+            "name": object_name,
+            "period": orbital_period,
+            "system": system_name,
+        }
+        
+        if "StarType" in event:
+            type = event["StarType"]
+            
+            if type not in self.notable_stars:
+                self.notable_stars[type] = {
+                    "highest": info,
+                    "lowest": info,
+                }
+            else:
+                if self.notable_stars[type]["highest"]["period"] < orbital_period:
+                    self.notable_stars[type]["highest"] = info
+                if self.notable_stars[type]["lowest"]["period"] > orbital_period:
+                    self.notable_stars[type]["lowest"] = info
+        elif "PlanetClass" in event:
+            type = event["PlanetClass"]
+            
+            if type not in self.notable_bodies:
+                self.notable_bodies[type] = {
+                    "highest": info,
+                    "lowest": info,
+                }
+            else:
+                if self.notable_bodies[type]["highest"]["period"] < orbital_period:
+                    self.notable_bodies[type]["highest"] = info
+                if self.notable_bodies[type]["lowest"]["period"] > orbital_period:
+                    self.notable_bodies[type]["lowest"] = info
     
     def get_output(self):
-        highest_formatted = self.format_period(self.highest_orbital_period)
-        lowest_formatted = self.format_period(self.lowest_orbital_period)
-    
-        self.add_line("Orbital period")
-        self.add_line(f"\tHighest: {highest_formatted} with object {self.highest_object_name} in system {self.highest_system_name}")
-        self.add_line(f"\tLowest: {lowest_formatted} with object {self.lowest_object_name} in system {self.lowest_system_name}")
+        self.add_line("Orbital period\n")
+        
+        self.add_line("Stars:")
+        for type in sorted(self.notable_stars):
+            self.add_type_info(stellar_info.type_to_name(type), self.notable_stars[type])
+            self.add_line()
+        
+        self.add_line()
+        self.add_line("Planets/moons:")
+        for type in sorted(self.notable_bodies):
+            self.add_type_info(type, self.notable_bodies[type])
+            self.add_line()
         
         return self._output
+    
+    
+    def shorten_body_name(self, name, system):
+        if name == system:
+            return name
+        
+        if name.startswith(system):
+            return name[len(system)+1:]
+        
+        return name
+    
+    
+    def add_type_info(self, type_name, info):
+        self.add_line(type_name)
+        
+        highest_info = info["highest"]
+        lowest_info = info["lowest"]
+            
+        highest_system = highest_info["system"]
+        lowest_system = lowest_info["system"]
+        
+        highest_object = highest_info["name"]
+        lowest_object = lowest_info["name"]
+        
+        highest_formatted = self.format_period(highest_info["period"])
+        lowest_formatted = self.format_period(lowest_info["period"])
+        
+        self.add_line(f"\tHighest: {highest_formatted} (object {highest_object} in system {highest_system})")
+        self.add_line(f"\tLowest: {lowest_formatted} (object {lowest_object} in system {lowest_system})")
     
     
     def format_period(self, period):
@@ -69,6 +124,9 @@ class OrbitalPeriod(collector.Collector):
         days = delta.days % 7
         weeks = delta.days // 7 % 7
         years = delta.days // 365
+        
+        if years >= 10:
+            return f"{years} years"
         
         result = f"{seconds} seconds"
         

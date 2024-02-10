@@ -10,7 +10,7 @@ class Collector:
         pass
     
     
-    def add_line(self, text: str):
+    def add_line(self, text: str = ""):
         self._output += text + "\n"
     
     

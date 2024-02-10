@@ -61,6 +61,10 @@ def type_to_name(type: str) -> str:
     return f"Unknown type '{type}'"
 
 
+def star_types() -> list[str]:
+    return list(_star_type_names.keys())
+
+
 def stellar_remnant_types() -> set[str]:
     types = set()
     white_dwarf_types = ["D", "DA", "DAB", "DAO", "DAZ", "DAV", "DB", "DBZ", "DBV",
