@@ -61,6 +61,27 @@ def type_to_name(type: str) -> str:
     return f"Unknown type '{type}'"
 
 
+def sorted_types() -> list[str]:
+    return [
+        "O",
+        "B", "B_BlueWhiteSuperGiant",
+        "A",
+        "F", "F_WhiteSuperGiant",
+        "G", "G_WhiteSuperGiant",
+        "K", "K_OrangeGiant",
+        "M", "M_RedGiant", "M_RedSuperGiant",
+        "T", "L", "Y",
+        "N",
+        "H", "SupermassiveBlackHole",
+        "D", "DA", "DAB", "DAO", "DAZ", "DAV", "DB", "DBZ", "DBV", "DC", "DCV", "DO", "DOV", "DQ", "DX",
+        "W", "WN", "WNC", "WC", "WO",
+        "TTS",
+        "AeBe",
+        "S", "MS",
+        "C", "CS", "CN", "CJ", "CH", "CHd",
+    ]
+
+
 def star_types() -> list[str]:
     return list(_star_type_names.keys())
 

@@ -64,7 +64,10 @@ class OrbitalPeriod(collector.Collector):
         self.add_line("Orbital period\n")
         
         self.add_line("Stars:")
-        for type in sorted(self.notable_stars):
+        for type in stellar_info.sorted_types():
+            if type not in self.notable_stars:
+                continue
+            
             self.add_type_info(stellar_info.type_to_name(type), self.notable_stars[type])
             self.add_line()
         
@@ -102,8 +105,11 @@ class OrbitalPeriod(collector.Collector):
         highest_formatted = self.format_period(highest_info["period"])
         lowest_formatted = self.format_period(lowest_info["period"])
         
-        self.add_line(f"\tHighest: {highest_formatted} (object {highest_object} in system {highest_system})")
-        self.add_line(f"\tLowest: {lowest_formatted} (object {lowest_object} in system {lowest_system})")
+        if highest_info == lowest_info:
+            self.add_line(f"\tHighest/lowest: {highest_formatted} (object {highest_object} in system {highest_system})")
+        else:
+            self.add_line(f"\tHighest: {highest_formatted} (object {highest_object} in system {highest_system})")
+            self.add_line(f"\tLowest: {lowest_formatted} (object {lowest_object} in system {lowest_system})")
     
     
     def format_period(self, period):
