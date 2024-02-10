@@ -35,38 +35,30 @@ class OrbitalPeriod(collector.Collector):
         system_name = event["StarSystem"]
         object_name = self.shorten_body_name(event["BodyName"], system_name)
         
-        info = {
+        object_info = {
             "name": object_name,
             "period": orbital_period,
             "system": system_name,
         }
         
         if "StarType" in event:
-            type = event["StarType"]
-            
-            if type not in self.notable_stars:
-                self.notable_stars[type] = {
-                    "highest": info,
-                    "lowest": info,
-                }
-            else:
-                if self.notable_stars[type]["highest"]["period"] < orbital_period:
-                    self.notable_stars[type]["highest"] = info
-                if self.notable_stars[type]["lowest"]["period"] > orbital_period:
-                    self.notable_stars[type]["lowest"] = info
+            self.check_body(self.notable_stars, event["StarType"], object_info)
         elif "PlanetClass" in event:
-            type = event["PlanetClass"]
-            
-            if type not in self.notable_bodies:
-                self.notable_bodies[type] = {
-                    "highest": info,
-                    "lowest": info,
-                }
-            else:
-                if self.notable_bodies[type]["highest"]["period"] < orbital_period:
-                    self.notable_bodies[type]["highest"] = info
-                if self.notable_bodies[type]["lowest"]["period"] > orbital_period:
-                    self.notable_bodies[type]["lowest"] = info
+            self.check_body(self.notable_bodies, event["PlanetClass"], object_info)
+    
+    
+    def check_body(self, lookup_dict, type, object_info):
+        if type not in lookup_dict:
+            lookup_dict[type] = {
+                "highest": object_info,
+                "lowest": object_info,
+            }
+        else:
+            if lookup_dict[type]["highest"]["period"] < object_info["period"]:
+                lookup_dict[type]["highest"] = object_info
+            if lookup_dict[type]["lowest"]["period"] > object_info["period"]:
+                lookup_dict[type]["lowest"] = object_info
+    
     
     def get_output(self):
         self.add_line("Orbital period\n")
