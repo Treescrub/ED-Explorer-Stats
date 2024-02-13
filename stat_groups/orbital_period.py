@@ -66,16 +66,6 @@ class OrbitalPeriod(min_max_collector.MinMaxCollector):
         return self._output
     
     
-    def shorten_body_name(self, name, system):
-        if name == system:
-            return name
-        
-        if name.startswith(system):
-            return name[len(system)+1:]
-        
-        return name
-    
-    
     def add_type_info(self, type_name, info):
         self.add_line(type_name)
         
