@@ -9,6 +9,7 @@ Simple scripts to parse player journals and display interesting exploring stats 
 Run `exploration_stats.py` to list all stat groups that can be executed.
 
 To execute a stat group, pass the name as a subcommand.
+
 For example: `py exploration_stats.py visited_systems`
 
 ### Planned Stats
