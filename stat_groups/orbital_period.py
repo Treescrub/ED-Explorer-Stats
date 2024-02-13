@@ -1,4 +1,4 @@
-from . import collector
+from . import min_max_collector
 import datetime
 import stellar_info
 
@@ -14,15 +14,9 @@ def setup_parser(parser):
     pass
 
 
-class OrbitalPeriod(collector.Collector):
-    notable_stars = None
-    notable_bodies = None
-
+class OrbitalPeriod(min_max_collector.MinMaxCollector):
     def __init__(self):
         super().__init__()
-        
-        self.notable_stars = {}
-        self.notable_bodies = {}
 
 
     def process_event(self, event):
@@ -30,16 +24,8 @@ class OrbitalPeriod(collector.Collector):
             return
         if "OrbitalPeriod" not in event:
             return
-        
-        orbital_period = event["OrbitalPeriod"]
-        system_name = event["StarSystem"]
-        object_name = self.shorten_body_name(event["BodyName"], system_name)
-        
-        object_info = {
-            "name": object_name,
-            "period": orbital_period,
-            "system": system_name,
-        }
+    
+        object_info = self.get_object_info(event["BodyName"], event["StarSystem"], event["OrbitalPeriod"])
         
         if "StarType" in event:
             self.check_body(self.notable_stars, event["StarType"], object_info)
@@ -54,9 +40,9 @@ class OrbitalPeriod(collector.Collector):
                 "lowest": object_info,
             }
         else:
-            if lookup_dict[type]["highest"]["period"] < object_info["period"]:
+            if lookup_dict[type]["highest"]["stat"] < object_info["stat"]:
                 lookup_dict[type]["highest"] = object_info
-            if lookup_dict[type]["lowest"]["period"] > object_info["period"]:
+            if lookup_dict[type]["lowest"]["stat"] > object_info["stat"]:
                 lookup_dict[type]["lowest"] = object_info
     
     
@@ -102,8 +88,8 @@ class OrbitalPeriod(collector.Collector):
         highest_object = highest_info["name"]
         lowest_object = lowest_info["name"]
         
-        highest_formatted = self.format_period(highest_info["period"])
-        lowest_formatted = self.format_period(lowest_info["period"])
+        highest_formatted = self.format_period(highest_info["stat"])
+        lowest_formatted = self.format_period(lowest_info["stat"])
         
         if highest_info == lowest_info:
             self.add_line(f"\tHighest/lowest: {highest_formatted} (object {highest_object} in system {highest_system})")
