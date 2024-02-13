@@ -13,7 +13,6 @@ To execute a stat group, pass the name as a subcommand.
 For example: `py exploration_stats.py visited_systems`
 
 ### Planned Stats
-* Rotational period
 * Gravity/mass
 * Age
 
