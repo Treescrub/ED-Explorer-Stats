@@ -11,4 +11,3 @@ Simple scripts to parse player journals and display interesting exploring stats 
 * Colored text (probably Colorama)
 
 ## Todo
-* scanned_bodies sections based on main sequence, degenerate stars, etc.
