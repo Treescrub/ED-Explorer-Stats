@@ -33,19 +33,6 @@ class OrbitalPeriod(min_max_collector.MinMaxCollector):
             self.check_body(self.notable_bodies, event["PlanetClass"], object_info)
     
     
-    def check_body(self, lookup_dict, type, object_info):
-        if type not in lookup_dict:
-            lookup_dict[type] = {
-                "highest": object_info,
-                "lowest": object_info,
-            }
-        else:
-            if lookup_dict[type]["highest"]["stat"] < object_info["stat"]:
-                lookup_dict[type]["highest"] = object_info
-            if lookup_dict[type]["lowest"]["stat"] > object_info["stat"]:
-                lookup_dict[type]["lowest"] = object_info
-    
-    
     def get_output(self):
         self.add_line("Orbital period\n")
         
