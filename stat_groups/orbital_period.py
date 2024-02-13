@@ -1,6 +1,6 @@
 from . import min_max_collector
-import datetime
 import stellar_info
+import time_formatting
 
 def new_collector():
     return OrbitalPeriod()
@@ -54,30 +54,4 @@ class OrbitalPeriod(min_max_collector.MinMaxCollector):
     
     
     def get_formatted_stat(self, stat):
-        delta = datetime.timedelta(seconds=stat)
-        
-        seconds = delta.seconds % 60
-        minutes = delta.seconds // 60 % 60
-        hours = delta.seconds // (60 * 60)
-        
-        days = delta.days % 7
-        weeks = delta.days // 7 % 7
-        years = delta.days // 365
-        
-        if years >= 10:
-            return f"{years} years"
-        
-        result = f"{seconds} seconds"
-        
-        if minutes > 0:
-            result = f"{minutes} minutes, " + result
-        if hours > 0:
-            result = f"{hours} hours, " + result
-        if days > 0:
-            result = f"{days} days, " + result
-        if weeks > 0:
-            result = f"{weeks} weeks, " + result
-        if years > 0:
-            result = f"{years} years, " + result
-        
-        return result
+        return time_formatting.format_period(stat)
