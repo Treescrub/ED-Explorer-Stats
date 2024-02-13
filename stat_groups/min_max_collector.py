@@ -11,6 +11,32 @@ class MinMaxCollector(collector.Collector):
         self.notable_bodies = {}
     
     
+    def get_formatted_stat(self, stat):
+        return stat
+    
+    
+    def add_type_info(self, type_name, info):
+        self.add_line(type_name)
+        
+        highest_info = info["highest"]
+        lowest_info = info["lowest"]
+            
+        highest_system = highest_info["system"]
+        lowest_system = lowest_info["system"]
+        
+        highest_object = highest_info["name"]
+        lowest_object = lowest_info["name"]
+        
+        highest_formatted = self.get_formatted_stat(highest_info["stat"])
+        lowest_formatted = self.get_formatted_stat(lowest_info["stat"])
+        
+        if highest_info == lowest_info:
+            self.add_line(f"\tHighest/lowest: {highest_formatted} (object {highest_object} in system {highest_system})")
+        else:
+            self.add_line(f"\tHighest: {highest_formatted} (object {highest_object} in system {highest_system})")
+            self.add_line(f"\tLowest: {lowest_formatted} (object {lowest_object} in system {lowest_system})")
+    
+    
     def get_object_info(self, object_name, system_name, stat):
         return {
             "name": self.shorten_body_name(object_name, system_name),

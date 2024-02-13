@@ -53,30 +53,8 @@ class OrbitalPeriod(min_max_collector.MinMaxCollector):
         return self._output
     
     
-    def add_type_info(self, type_name, info):
-        self.add_line(type_name)
-        
-        highest_info = info["highest"]
-        lowest_info = info["lowest"]
-            
-        highest_system = highest_info["system"]
-        lowest_system = lowest_info["system"]
-        
-        highest_object = highest_info["name"]
-        lowest_object = lowest_info["name"]
-        
-        highest_formatted = self.format_period(highest_info["stat"])
-        lowest_formatted = self.format_period(lowest_info["stat"])
-        
-        if highest_info == lowest_info:
-            self.add_line(f"\tHighest/lowest: {highest_formatted} (object {highest_object} in system {highest_system})")
-        else:
-            self.add_line(f"\tHighest: {highest_formatted} (object {highest_object} in system {highest_system})")
-            self.add_line(f"\tLowest: {lowest_formatted} (object {lowest_object} in system {lowest_system})")
-    
-    
-    def format_period(self, period):
-        delta = datetime.timedelta(seconds=period)
+    def get_formatted_stat(self, stat):
+        delta = datetime.timedelta(seconds=stat)
         
         seconds = delta.seconds % 60
         minutes = delta.seconds // 60 % 60

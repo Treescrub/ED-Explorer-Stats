@@ -53,23 +53,5 @@ class Radius(min_max_collector.MinMaxCollector):
         return self._output
     
     
-    def add_type_info(self, type_name, info):
-        self.add_line(type_name)
-        
-        highest_info = info["highest"]
-        lowest_info = info["lowest"]
-            
-        highest_system = highest_info["system"]
-        lowest_system = lowest_info["system"]
-        
-        highest_object = highest_info["name"]
-        lowest_object = lowest_info["name"]
-        
-        highest_stat = round(highest_info["stat"] / 1000, 1)
-        lowest_stat = round(lowest_info["stat"] / 1000, 1)
-        
-        if highest_info == lowest_info:
-            self.add_line(f"\tHighest/lowest: {highest_stat}km (object {highest_object} in system {highest_system})")
-        else:
-            self.add_line(f"\tHighest: {highest_stat}km (object {highest_object} in system {highest_system})")
-            self.add_line(f"\tLowest: {lowest_stat}km (object {lowest_object} in system {lowest_system})")
+    def get_formatted_stat(self, stat):
+        return f"{round(stat / 1000, 1)}km"
