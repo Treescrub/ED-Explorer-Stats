@@ -19,3 +19,4 @@ To execute a stat group, pass the name as a subcommand. For example: `py explora
 * Colored text (probably Colorama)
 
 ## Todo
+* Progress bar while processing journal files
