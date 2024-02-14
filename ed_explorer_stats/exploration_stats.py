@@ -1,9 +1,10 @@
 import argparse
 import os
-import read_journals
 
-import stat_groups
-from stat_groups import *
+from . import read_journals
+
+from . import stat_groups
+from .stat_groups import *
 
 import colorama
 

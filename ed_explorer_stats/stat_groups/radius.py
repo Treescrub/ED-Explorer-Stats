@@ -1,6 +1,6 @@
-from . import min_max_collector
 import datetime
-import stellar_info
+from . import min_max_collector
+from .. import stellar_info
 
 def new_collector():
     return Radius()

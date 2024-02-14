@@ -1,5 +1,5 @@
 from . import collector
-from colors import ColorGroup
+from ..colors import ColorGroup
 
 def new_collector():
     return MostBodies()

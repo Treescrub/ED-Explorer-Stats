@@ -1,5 +1,5 @@
 from . import collector
-from colors import ColorGroup
+from ..colors import ColorGroup
 
 class MinMaxCollector(collector.Collector):
     notable_stars = None

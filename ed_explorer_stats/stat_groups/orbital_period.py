@@ -1,32 +1,32 @@
 from . import min_max_collector
-import stellar_info
-import time_formatting
-from colors import ColorGroup
+from .. import stellar_info
+from .. import time_formatting
+from ..colors import ColorGroup
 
 def new_collector():
-    return RotationPeriod()
+    return OrbitalPeriod()
 
 
 def get_description():
-    return "Objects with notable rotational periods"
+    return "Objects with notable orbital periods"
 
 
 def setup_parser(parser):
     pass
 
 
-class RotationPeriod(min_max_collector.MinMaxCollector):
+class OrbitalPeriod(min_max_collector.MinMaxCollector):
     def __init__(self):
         super().__init__()
-    
-    
+
+
     def process_event(self, event):
         if event["event"] != "Scan":
             return
-        if "RotationPeriod" not in event:
+        if "OrbitalPeriod" not in event:
             return
     
-        object_info = self.get_object_info(event["BodyName"], event["StarSystem"], abs(event["RotationPeriod"]))
+        object_info = self.get_object_info(event["BodyName"], event["StarSystem"], event["OrbitalPeriod"])
         
         if "StarType" in event:
             self.check_body(self.notable_stars, event["StarType"], object_info)
@@ -35,7 +35,7 @@ class RotationPeriod(min_max_collector.MinMaxCollector):
     
     
     def get_output(self):
-        self.add_line(f"{ColorGroup.TITLE}Rotation period\n")
+        self.add_line(f"{ColorGroup.TITLE}Orbital period\n")
         
         self.add_line(f"{ColorGroup.SECTION_TITLE}Stars:")
         for type in stellar_info.sorted_types():

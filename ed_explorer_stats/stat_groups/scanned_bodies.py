@@ -1,5 +1,5 @@
 from . import collector
-import stellar_info
+from .. import stellar_info
 
 
 def new_collector():

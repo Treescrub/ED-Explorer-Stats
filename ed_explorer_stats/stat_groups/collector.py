@@ -1,4 +1,4 @@
-from colors import ColorGroup
+from ..colors import ColorGroup
 
 class Collector:
     _output = None
