@@ -5,6 +5,7 @@ __all__ = [
     "orbital_period",
     "rotation_period",
     "radius",
+    "gravity",
 ]
 
 
