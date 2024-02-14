@@ -1,4 +1,5 @@
 from . import collector
+from colors import ColorGroup
 
 class MinMaxCollector(collector.Collector):
     notable_stars = None
@@ -16,7 +17,7 @@ class MinMaxCollector(collector.Collector):
     
     
     def add_type_info(self, type_name, info):
-        self.add_line(type_name)
+        self.add_line(str(ColorGroup.TYPE) + type_name)
         
         highest_info = info["highest"]
         lowest_info = info["lowest"]
@@ -31,10 +32,10 @@ class MinMaxCollector(collector.Collector):
         lowest_formatted = self.get_formatted_stat(lowest_info["stat"])
         
         if highest_info == lowest_info:
-            self.add_line(f"\tHighest/lowest: {highest_formatted} (object {highest_object} in system {highest_system})")
+            self.add_line(f"\tHighest/lowest: {ColorGroup.STAT}{highest_formatted}{ColorGroup.DEFAULT} (object {highest_object} in system {highest_system})")
         else:
-            self.add_line(f"\tHighest: {highest_formatted} (object {highest_object} in system {highest_system})")
-            self.add_line(f"\tLowest: {lowest_formatted} (object {lowest_object} in system {lowest_system})")
+            self.add_line(f"\tHighest: {ColorGroup.STAT}{highest_formatted}{ColorGroup.DEFAULT} (object {highest_object} in system {highest_system})")
+            self.add_line(f"\tLowest: {ColorGroup.STAT}{lowest_formatted}{ColorGroup.DEFAULT} (object {lowest_object} in system {lowest_system})")
     
     
     def get_object_info(self, object_name, system_name, stat):

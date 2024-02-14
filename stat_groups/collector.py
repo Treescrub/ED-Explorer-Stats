@@ -1,3 +1,5 @@
+from colors import ColorGroup
+
 class Collector:
     _output = None
     
@@ -11,7 +13,7 @@ class Collector:
     
     
     def add_line(self, text: str = ""):
-        self._output += text + "\n"
+        self._output += f"{text}\n{ColorGroup.RESET}"
     
     
     def get_output(self):

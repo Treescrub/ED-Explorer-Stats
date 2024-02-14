@@ -1,6 +1,7 @@
 from . import min_max_collector
 import stellar_info
 import time_formatting
+from colors import ColorGroup
 
 def new_collector():
     return RotationPeriod()
@@ -34,9 +35,9 @@ class RotationPeriod(min_max_collector.MinMaxCollector):
     
     
     def get_output(self):
-        self.add_line("Rotation period\n")
+        self.add_line(f"{ColorGroup.TITLE}Rotation period\n")
         
-        self.add_line("Stars:")
+        self.add_line(f"{ColorGroup.SECTION_TITLE}Stars:")
         for type in stellar_info.sorted_types():
             if type not in self.notable_stars:
                 continue
@@ -45,7 +46,7 @@ class RotationPeriod(min_max_collector.MinMaxCollector):
             self.add_line()
         
         self.add_line()
-        self.add_line("Planets/moons:")
+        self.add_line(f"{ColorGroup.SECTION_TITLE}Planets/moons:")
         for type in sorted(self.notable_bodies):
             self.add_type_info(type, self.notable_bodies[type])
             self.add_line()

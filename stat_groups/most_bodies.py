@@ -1,4 +1,5 @@
 from . import collector
+from colors import ColorGroup
 
 def new_collector():
     return MostBodies()
@@ -35,6 +36,6 @@ class MostBodies(collector.Collector):
     
     
     def get_output(self):
-        self.add_line(f"Most bodies: {self.best_body_count} at system {self.best_system_name}")
+        self.add_line(f"{ColorGroup.TITLE}Most bodies{ColorGroup.RESET}: {ColorGroup.STAT}{self.best_body_count}{ColorGroup.RESET} at system {self.best_system_name}")
         
         return self._output
