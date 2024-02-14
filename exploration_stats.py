@@ -5,11 +5,15 @@ import read_journals
 import stat_groups
 from stat_groups import *
 
+import colorama
+
 PROGRAM_NAME = "ED Exploration Stats"
 VERSION = "0.1.0"
 
 
 def main():
+    colorama.init(autoreset=True)
+
     parser = build_arg_parser()
     
     args = parser.parse_args()
