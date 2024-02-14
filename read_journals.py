@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 
 
 def read_events(path):
@@ -8,11 +9,20 @@ def read_events(path):
     for entry in os.listdir(path):
         entry_path = os.path.join(path, entry)
         
-        if not os.path.isfile(entry_path) or not entry.startswith("Journal.") or not entry.endswith(".log"):
-            continue
+        if os.path.isfile(entry_path) and entry.startswith("Journal.") and entry.endswith(".log"):
+            journal_paths.append(entry_path)
+    
+    for i in range(len(journal_paths)):
+        path = journal_paths[i]
         
-        for event in _read_journal(entry_path):
+        for event in _read_journal(path):
             yield event
+        
+        progress_text = f"{i+1}/{len(journal_paths)} journal files processed"
+        if i == len(journal_paths) - 1:
+            print(" " * len(progress_text), flush=True, end="\r")
+        else:
+            print(progress_text, flush=True, end="\r")
 
 
 def _read_journal(path):
