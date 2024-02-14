@@ -20,4 +20,3 @@ For example: `py exploration_stats.py visited_systems`
 * Colored text (probably Colorama)
 
 ## Todo
-* Progress bar while processing journal files
