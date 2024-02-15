@@ -1,7 +1,7 @@
 from . import min_max_collector
 from .. import stellar_info
 from .. import time_formatting
-from ..colors import ColorGroup
+from ..colors import TITLE, SECTION
 
 def new_collector():
     return OrbitalPeriod()
@@ -35,9 +35,9 @@ class OrbitalPeriod(min_max_collector.MinMaxCollector):
     
     
     def get_output(self):
-        self.add_line(f"{ColorGroup.TITLE}Orbital period\n")
+        self.add_line(f"{TITLE}Orbital period\n")
         
-        self.add_line(f"{ColorGroup.SECTION_TITLE}Stars:")
+        self.add_line(f"{SECTION}Stars:")
         for type in stellar_info.sorted_types():
             if type not in self.notable_stars:
                 continue
@@ -46,7 +46,7 @@ class OrbitalPeriod(min_max_collector.MinMaxCollector):
             self.add_line()
         
         self.add_line()
-        self.add_line(f"{ColorGroup.SECTION_TITLE}Planets/moons:")
+        self.add_line(f"{SECTION}Planets/moons:")
         for type in sorted(self.notable_bodies):
             self.add_type_info(type, self.notable_bodies[type])
             self.add_line()

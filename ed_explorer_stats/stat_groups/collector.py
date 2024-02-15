@@ -1,4 +1,4 @@
-from ..colors import ColorGroup
+from ..colors import RESET
 
 class Collector:
     _output = None
@@ -13,7 +13,7 @@ class Collector:
     
     
     def add_line(self, text: str = ""):
-        self._output += f"{text}\n{ColorGroup.RESET}"
+        self._output += f"{text}\n{RESET}"
     
     
     def get_output(self):
