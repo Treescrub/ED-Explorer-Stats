@@ -26,6 +26,5 @@ colorama
 * Fuel scooped/time spent fuel scooping
 
 ## Planned Features
-* Colored text
 
 ## Todo
