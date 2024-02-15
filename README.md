@@ -23,7 +23,6 @@ For example: `explorer-stats visited_systems`
 * colorama
 
 ### Planned Stats
-* Fuel scooped/time spent fuel scooping (FuelScoop)
 * DSS probes used/average efficiency (SAAScanComplete)
 * Biologicals scanned by genus and species (ScanOrganic)
 

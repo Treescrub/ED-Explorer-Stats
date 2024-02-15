@@ -6,6 +6,7 @@ __all__ = [
     "rotation_period",
     "radius",
     "gravity",
+    "fuel_scooped",
 ]
 
 
