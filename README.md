@@ -23,7 +23,7 @@ For example: `explorer-stats visited_systems`
 colorama
 
 ### Planned Stats
-* Age
+* Fuel scooped/time spent fuel scooping
 
 ## Planned Features
 * Colored text
