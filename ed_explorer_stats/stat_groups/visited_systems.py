@@ -1,4 +1,5 @@
 from . import collector
+from ..colors import TITLE, STAT
 
 def new_collector():
     return VisitedSystems()
@@ -29,7 +30,7 @@ class VisitedSystems(collector.Collector):
     
     
     def get_output(self):
-        self.add_line("Visited systems")
-        self.add_line(f"\tTotal visited systems: {len(self.visited_systems)}")
+        self.add_line(f"{TITLE}Visited systems")
+        self.add_line(f"\tTotal visited systems: {STAT}{len(self.visited_systems)}")
         
         return self._output

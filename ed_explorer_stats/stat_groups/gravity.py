@@ -1,4 +1,5 @@
 from . import min_max_collector
+from ..colors import TITLE
 
 def new_collector():
     return Gravity()
@@ -32,7 +33,7 @@ class Gravity(min_max_collector.MinMaxCollector):
     
     
     def get_output(self):
-        self.add_line("Landable gravity\n")
+        self.add_line(f"{TITLE}Landable gravity\n")
 
         for type in sorted(self.notable_bodies):
             self.add_type_info(type, self.notable_bodies[type])

@@ -1,5 +1,6 @@
 from . import collector
 from .. import stellar_info
+from ..colors import TITLE, SECTION, TYPE, STAT, RESET
 
 
 def new_collector():
@@ -66,40 +67,40 @@ class ScannedBodies(collector.Collector):
     
     
     def get_output(self):
-        self.add_line("Scanned bodies\n")
-        self.add_line(f"Total: {self.total}\n")
+        self.add_line(f"{TITLE}Scanned bodies\n")
+        self.add_line(f"Total: {STAT}{self.total}\n")
         
-        self.add_line("Stellar remnants:")
+        self.add_line(f"{SECTION}Stellar remnants:")
         stellar_remnant_names = self.get_stellar_remnant_names()
         for name in sorted(stellar_remnant_names):
             type = stellar_remnant_names[name]
             count = self.star_types_scanned.get(type, 0)
-            self.add_line(f"\t{name}: {count}")
+            self.add_line(f"\t{TYPE}{name}{RESET}: {STAT}{count}")
             
             if type in self.star_types_scanned:
                 del self.star_types_scanned[type]
         
-        self.add_line("Main sequence stars:")
+        self.add_line(f"{SECTION}Main sequence stars:")
         for type in ["O", "B", "A", "F", "G", "K", "M"]:
-            self.add_line(f"\t{type} star: {self.star_types_scanned.get(type, 0)}")
+            self.add_line(f"\t{TYPE}{type} star{RESET}: {STAT}{self.star_types_scanned.get(type, 0)}")
             
             if type in self.star_types_scanned:
                 del self.star_types_scanned[type]
         
-        self.add_line("Dwarf stars:")
+        self.add_line(f"{SECTION}Dwarf stars:")
         for type in ["Y", "T", "L"]:
-            self.add_line(f"\t{type} brown dwarf: {self.star_types_scanned.get(type, 0)}")
+            self.add_line(f"\t{TYPE}{type} brown dwarf{RESET}: {STAT}{self.star_types_scanned.get(type, 0)}")
             
             if type in self.star_types_scanned:
                 del self.star_types_scanned[type]
         
-        self.add_line("Other:")
+        self.add_line(f"{SECTION}Other:")
         for type in sorted(self.star_types_scanned):
             name = stellar_info.type_to_name(type)
-            self.add_line(f"\t{name}: {self.star_types_scanned[type]}")
+            self.add_line(f"\t{TYPE}{name}{RESET}: {STAT}{self.star_types_scanned[type]}")
         
-        self.add_line("Planets:")
+        self.add_line(f"{SECTION}Planets:")
         for planet_class in sorted(self.planet_classes_scanned):
-            self.add_line(f"\t{planet_class}: {self.planet_classes_scanned[planet_class]}")
+            self.add_line(f"\t{TYPE}{planet_class}{RESET}: {STAT}{self.planet_classes_scanned[planet_class]}")
         
         return self._output

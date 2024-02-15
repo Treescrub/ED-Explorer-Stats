@@ -1,6 +1,7 @@
 import datetime
 from . import min_max_collector
 from .. import stellar_info
+from ..colors import TITLE, SECTION
 
 def new_collector():
     return Radius()
@@ -34,9 +35,9 @@ class Radius(min_max_collector.MinMaxCollector):
     
     
     def get_output(self):
-        self.add_line("Object radius\n")
+        self.add_line(f"{TITLE}Object radius\n")
         
-        self.add_line("Stars:")
+        self.add_line(f"{SECTION}Stars:")
         for type in stellar_info.sorted_types():
             if type not in self.notable_stars:
                 continue
@@ -45,7 +46,7 @@ class Radius(min_max_collector.MinMaxCollector):
             self.add_line()
         
         self.add_line()
-        self.add_line("Planets/moons:")
+        self.add_line(f"{SECTION}Planets/moons:")
         for type in sorted(self.notable_bodies):
             self.add_type_info(type, self.notable_bodies[type])
             self.add_line()

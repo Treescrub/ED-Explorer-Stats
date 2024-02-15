@@ -2,6 +2,7 @@ import argparse
 import os
 
 from . import read_journals
+from .colors import TITLE, STAT, RESET
 
 from . import stat_groups
 from .stat_groups import *
@@ -51,7 +52,7 @@ def run_main():
 
 def print_stat_groups():
     for name in stat_groups.get_module_names(): 
-        print(f"{name} - {stat_groups.get_module(name).get_description()}")
+        print(f"{TITLE}{name}{RESET} - {STAT}{stat_groups.get_module(name).get_description()}")
 
 
 def build_arg_parser():
