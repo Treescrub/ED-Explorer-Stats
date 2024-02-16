@@ -24,7 +24,6 @@ For example: `explorer-stats visited_systems`
 
 ### Planned Stats
 * DSS probes used/average efficiency (SAAScanComplete)
-* Biologicals scanned by genus and species (ScanOrganic)
 
 ## Planned Features
 

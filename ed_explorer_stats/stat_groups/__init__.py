@@ -7,6 +7,7 @@ __all__ = [
     "radius",
     "gravity",
     "fuel_scooped",
+    "biological",
 ]
 
 
