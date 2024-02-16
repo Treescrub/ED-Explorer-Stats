@@ -1,6 +1,6 @@
 # ED Explorer Stats
 
-Simple scripts to parse player journals and display interesting exploring stats for the game Elite Dangerous
+A Python application to parse player journals and display interesting exploring stats for Elite Dangerous.
 
 Windows is the only currently supported platform.
 
@@ -26,5 +26,8 @@ For example: `explorer-stats visited_systems`
 * DSS probes used/average efficiency (SAAScanComplete)
 
 ## Planned Features
+* Stat caching to reduce journal reading
 
 ## Todo
+* Support Linux
+* Upload to PyPI
