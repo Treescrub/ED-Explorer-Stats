@@ -8,6 +8,7 @@ __all__ = [
     "gravity",
     "fuel_scooped",
     "biological",
+    "surface_scans",
 ]
 
 

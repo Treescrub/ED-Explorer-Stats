@@ -23,7 +23,6 @@ For example: `explorer-stats visited_systems`
 * colorama
 
 ### Planned Stats
-* DSS probes used/average efficiency (SAAScanComplete)
 
 ## Planned Features
 * Stat caching to reduce journal reading
