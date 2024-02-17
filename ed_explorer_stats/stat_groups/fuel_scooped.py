@@ -1,5 +1,4 @@
 from . import collector
-from .. import stellar_info
 from .. import time_formatting
 from ..colors import TITLE, SECTION, STAT, RESET
 
