@@ -8,7 +8,8 @@ Windows is the only currently supported platform.
 
 ## Install
 
-Install with `pip install .`
+To install from source, use `pip install .`.
+To install from PyPI, use `pip install ed-explorer-stats`.
 
 ## Usage
 
@@ -21,6 +22,10 @@ For example: `explorer-stats visited_systems`
 ## Dependencies
 
 * colorama
+
+## Development
+
+To develop with an editable install, run `pip install --editable .`.
 
 ## Planned Features
 * Stat caching to reduce journal reading
