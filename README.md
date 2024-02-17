@@ -22,8 +22,6 @@ For example: `explorer-stats visited_systems`
 
 * colorama
 
-### Planned Stats
-
 ## Planned Features
 * Stat caching to reduce journal reading
 
