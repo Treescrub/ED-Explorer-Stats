@@ -3,13 +3,16 @@ import os
 import sys
 
 
-def read_events(path):
+def read_events(path, exclude_legacy=False):
     journal_paths = []
 
     for entry in os.listdir(path):
         entry_path = os.path.join(path, entry)
         
         if os.path.isfile(entry_path) and entry.startswith("Journal.") and entry.endswith(".log"):
+            if exclude_legacy and "-" not in entry:
+                continue
+
             journal_paths.append(entry_path)
     
     for i in range(len(journal_paths)):

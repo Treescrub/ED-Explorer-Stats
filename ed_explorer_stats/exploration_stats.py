@@ -35,8 +35,8 @@ def run_stat_group(args):
     collector = module.new_collector()
     
     saves_path = os.path.expandvars(args.saves_path)
-    
-    for event in read_journals.read_events(saves_path):
+
+    for event in read_journals.read_events(saves_path, args.exclude_legacy):
         collector.process_event(event)
     
     print(collector.get_output())
@@ -57,8 +57,12 @@ def print_stat_groups():
 
 def build_arg_parser():
     parser = argparse.ArgumentParser(prog=PROGRAM_NAME)
-    parser.add_argument("--saves_path", type=str, default="%USERPROFILE%/Saved Games/Frontier Developments/Elite Dangerous", help="path to the ED saved data")
+    parser.add_argument("--saves_path", type=str,
+                        default="%USERPROFILE%/Saved Games/Frontier Developments/Elite Dangerous",
+                        help="path to the ED saved data")
     parser.add_argument("--version", action="version", version=f"{PROGRAM_NAME} v{VERSION}")
+    parser.add_argument("-xl", "--exclude-legacy", "--no-legacy", action="store_true",
+                        help="Exclude legacy journal files from stats", dest="exclude_legacy")
     
     subparsers = parser.add_subparsers(dest="stat_group")
     
