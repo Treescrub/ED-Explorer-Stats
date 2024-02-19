@@ -9,7 +9,7 @@ from .stat_groups import *
 
 import colorama
 
-PROGRAM_NAME = "ED Exploration Stats"
+PROGRAM_NAME = "explorer-stats"
 VERSION = "1.0.0"
 
 
