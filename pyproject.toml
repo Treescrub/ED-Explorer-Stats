@@ -4,10 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ed-explorer-stats"
-version = "1.0.0"
 dependencies = [
 	"colorama",
 ]
+dynamic = ["version"]
 
 [project.scripts]
 explorer-stats = "ed_explorer_stats.exploration_stats:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "ed_explorer_stats.exploration_stats.VERSION"}

@@ -10,7 +10,7 @@ from .stat_groups import *
 import colorama
 
 PROGRAM_NAME = "ED Exploration Stats"
-VERSION = "0.1.0"
+VERSION = "1.0.0"
 
 
 def main():
