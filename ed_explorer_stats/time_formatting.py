@@ -39,4 +39,4 @@ def format_period(seconds):
     
 
 def _get_plural(count):
-        return 's' if count != 1 else ''
+    return 's' if count != 1 else ''

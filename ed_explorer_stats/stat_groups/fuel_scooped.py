@@ -37,7 +37,6 @@ class FuelScooped(collector.Collector):
     def __init__(self):
         super().__init__()
 
-    
     def process_event(self, event):
         if event["event"] == "Loadout":
             for module in event["Modules"]:
@@ -56,17 +55,15 @@ class FuelScooped(collector.Collector):
         
         self.total_fuel_scooped += fuel_scooped
         self.time_scooping += fuel_scooped / self.last_fuelscoop_rate
-    
-    
+
     def get_output(self):
         self.add_line(f"{TITLE}Fuel scooped\n")
         
         self.add_line(f"{SECTION}Total fuel scooped{RESET}: {STAT}{round(self.total_fuel_scooped)} tonnes")
-        self.add_line(f"{SECTION}Time spent scooping{RESET}: {STAT}{time_formatting.format_period(self.time_scooping)}{RESET}")
+        self.add_line(f"{SECTION}Time spent scooping{RESET}: {STAT}{time_formatting.format_period(self.time_scooping)}")
         
         return self._output
-        
-    
+
     def get_scoop_rate(self, full_name):
         size = int(full_name[len("int_fuelscoop_size")])
         class_rating = int(full_name[-1])

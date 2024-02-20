@@ -1,5 +1,4 @@
 from . import collector
-from .. import time_formatting
 from ..colors import TITLE, SECTION, STAT, RESET
 
 
@@ -24,7 +23,6 @@ class SurfaceScans(collector.Collector):
     def __init__(self):
         super().__init__()
 
-    
     def process_event(self, event):
         if event["event"] != "SAAScanComplete":
             return
@@ -39,8 +37,7 @@ class SurfaceScans(collector.Collector):
             self.average_efficiency += probes_used / efficiency_target
         else:
             self.total_rings += 1
-    
-    
+
     def get_output(self):
         self.add_line(f"{TITLE}Surface scans\n")
         

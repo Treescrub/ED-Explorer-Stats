@@ -1,6 +1,5 @@
 import json
 import os
-import sys
 
 
 def read_events(path, exclude_legacy=False):

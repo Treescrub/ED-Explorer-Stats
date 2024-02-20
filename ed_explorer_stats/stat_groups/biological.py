@@ -1,5 +1,4 @@
 from . import collector
-from .. import stellar_info
 from ..colors import TITLE, SECTION, TYPE, STAT, RESET
 
 
@@ -19,15 +18,13 @@ class Biological(collector.Collector):
     scanned_genus = None
     latest_localisation = None
     total = 0
-    
-    
+
     def __init__(self):
         super().__init__()
         
         self.scanned_genus = {}
         self.latest_localisation = {}
 
-    
     def process_event(self, event):
         if event["event"] != "ScanOrganic":
             return
@@ -53,7 +50,6 @@ class Biological(collector.Collector):
             self.scanned_genus[genus_id][species_id] = 0
         
         self.scanned_genus[genus_id][species_id] += 1
-
 
     def get_output(self):
         self.add_line(f"{TITLE}Biological data\n")

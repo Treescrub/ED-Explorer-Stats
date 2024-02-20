@@ -20,8 +20,7 @@ class ScannedBodies(collector.Collector):
     planet_classes_scanned = None
     star_types_scanned = None
     total = 0
-    
-    
+
     def __init__(self):
         super().__init__()
         
@@ -29,7 +28,6 @@ class ScannedBodies(collector.Collector):
         self.planet_classes_scanned = {}
         self.star_types_scanned = {}
 
-    
     def process_event(self, event):
         if event["event"] != "Scan":
             return
@@ -55,8 +53,7 @@ class ScannedBodies(collector.Collector):
                 self.star_types_scanned[star_type] = 0
             
             self.star_types_scanned[star_type] += 1
-    
-    
+
     def get_stellar_remnant_names(self):
         names = {}
     
@@ -64,8 +61,7 @@ class ScannedBodies(collector.Collector):
             names[stellar_info.type_to_name(type)] = type
         
         return names
-    
-    
+
     def get_output(self):
         self.add_line(f"{TITLE}Scanned bodies\n")
         self.add_line(f"Total: {STAT}{self.total}\n")

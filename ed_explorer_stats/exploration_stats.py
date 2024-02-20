@@ -1,13 +1,12 @@
 import argparse
 import os
 
-from . import read_journals
-from .colors import TITLE, STAT, RESET
+import colorama
 
+from . import read_journals
 from . import stat_groups
 from .stat_groups import *
-
-import colorama
+from .colors import TITLE, STAT, RESET
 
 PROGRAM_NAME = "explorer-stats"
 VERSION = "1.0.0"

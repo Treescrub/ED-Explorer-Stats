@@ -1,6 +1,7 @@
 from . import min_max_collector
 from ..colors import TITLE
 
+
 def new_collector():
     return Gravity()
 
@@ -14,11 +15,9 @@ def setup_parser(parser):
 
 
 class Gravity(min_max_collector.MinMaxCollector):
-
     def __init__(self):
         super().__init__()
-    
-    
+
     def process_event(self, event):
         if event["event"] != "Scan":
             return
@@ -30,8 +29,7 @@ class Gravity(min_max_collector.MinMaxCollector):
         object_info = self.get_object_info(event["BodyName"], event["StarSystem"], event["SurfaceGravity"])
         
         self.check_body(self.notable_bodies, event["PlanetClass"], object_info)
-    
-    
+
     def get_output(self):
         self.add_line(f"{TITLE}Landable gravity\n")
 
@@ -40,7 +38,6 @@ class Gravity(min_max_collector.MinMaxCollector):
             self.add_line()
         
         return self._output
-    
-    
+
     def get_formatted_stat(self, stat):
         return f"{round(stat / 9.8, 3)}g"

@@ -3,6 +3,7 @@ from . import min_max_collector
 from .. import stellar_info
 from ..colors import TITLE, SECTION
 
+
 def new_collector():
     return Radius()
 
@@ -19,7 +20,6 @@ class Radius(min_max_collector.MinMaxCollector):
     def __init__(self):
         super().__init__()
 
-
     def process_event(self, event):
         if event["event"] != "Scan":
             return
@@ -32,8 +32,7 @@ class Radius(min_max_collector.MinMaxCollector):
             self.check_body(self.notable_stars, event["StarType"], object_info)
         elif "PlanetClass" in event:
             self.check_body(self.notable_bodies, event["PlanetClass"], object_info)
-    
-    
+
     def get_output(self):
         self.add_line(f"{TITLE}Object radius\n")
         
@@ -52,7 +51,6 @@ class Radius(min_max_collector.MinMaxCollector):
             self.add_line()
         
         return self._output
-    
-    
+
     def get_formatted_stat(self, stat):
         return f"{round(stat / 1000, 1)}km"

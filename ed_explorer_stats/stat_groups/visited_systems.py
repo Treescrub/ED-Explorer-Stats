@@ -21,16 +21,15 @@ class VisitedSystems(collector.Collector):
         
         self.visited_systems = set()
 
-
     def process_event(self, event):
         if event["event"] != "Scan" and event["event"] != "Location" and event["event"] != "FSDJump":
             return
             
         self.visited_systems.add(event["StarSystem"])
-    
-    
+
     def get_output(self):
         self.add_line(f"{TITLE}Visited systems")
         self.add_line(f"\tTotal visited systems: {STAT}{len(self.visited_systems)}")
         
         return self._output
+    

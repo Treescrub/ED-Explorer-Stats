@@ -89,7 +89,7 @@ def star_types() -> list[str]:
 def stellar_remnant_types() -> set[str]:
     types = set()
     white_dwarf_types = ["D", "DA", "DAB", "DAO", "DAZ", "DAV", "DB", "DBZ", "DBV",
-        "DO", "DOV", "DQ", "DC", "DCV", "DX"]
+                         "DO", "DOV", "DQ", "DC", "DCV", "DX"]
     
     types.update(white_dwarf_types)
     types.add("H")

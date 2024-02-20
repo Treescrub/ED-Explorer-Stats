@@ -1,6 +1,7 @@
 from . import collector
 from ..colors import TITLE, STAT, RESET
 
+
 def new_collector():
     return MostBodies()
 
@@ -22,7 +23,6 @@ class MostBodies(collector.Collector):
         
         self.best_body_count = 0
 
-
     def process_event(self, event):
         if event["event"] != "FSSDiscoveryScan": # Relying entirely on honking events can miss manual discovery
             return
@@ -33,8 +33,7 @@ class MostBodies(collector.Collector):
         if count > self.best_body_count:
             self.best_system_name = system
             self.best_body_count = count
-    
-    
+
     def get_output(self):
         self.add_line(f"{TITLE}Most bodies{RESET}: {STAT}{self.best_body_count}{RESET} at system {self.best_system_name}")
         

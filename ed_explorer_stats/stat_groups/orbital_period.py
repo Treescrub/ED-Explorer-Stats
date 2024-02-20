@@ -3,6 +3,7 @@ from .. import stellar_info
 from .. import time_formatting
 from ..colors import TITLE, SECTION
 
+
 def new_collector():
     return OrbitalPeriod()
 
@@ -19,7 +20,6 @@ class OrbitalPeriod(min_max_collector.MinMaxCollector):
     def __init__(self):
         super().__init__()
 
-
     def process_event(self, event):
         if event["event"] != "Scan":
             return
@@ -32,8 +32,7 @@ class OrbitalPeriod(min_max_collector.MinMaxCollector):
             self.check_body(self.notable_stars, event["StarType"], object_info)
         elif "PlanetClass" in event:
             self.check_body(self.notable_bodies, event["PlanetClass"], object_info)
-    
-    
+
     def get_output(self):
         self.add_line(f"{TITLE}Orbital period\n")
         
@@ -52,7 +51,6 @@ class OrbitalPeriod(min_max_collector.MinMaxCollector):
             self.add_line()
         
         return self._output
-    
-    
+
     def get_formatted_stat(self, stat):
         return time_formatting.format_period(stat)
