@@ -5,6 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ed-explorer-stats"
 description = "Display interesting stats for Elite Dangerous explorers"
+readme = "README.md"
 dependencies = [
 	"colorama",
 ]
@@ -21,6 +22,7 @@ classifiers = [
 	"Natural Language :: English",
 
 	"Programming Language :: Python :: 3",
+	"Programming Language :: Python :: 3.10",
 
 	"Topic :: Games/Entertainment",
 ]
