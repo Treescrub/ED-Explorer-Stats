@@ -9,7 +9,7 @@ from .stat_groups import *
 from .colors import TITLE, STAT, RESET
 
 PROGRAM_NAME = "explorer-stats"
-VERSION = "1.0.1"
+VERSION = "1.0.2"
 
 
 def main():
