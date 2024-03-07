@@ -28,7 +28,7 @@ def read_events(path, exclude_legacy=False):
 
 
 def _read_journal(path):
-    with open(path) as journal_file:
+    with open(path, encoding="utf-8") as journal_file:
         for line in journal_file:
             event = json.loads(line)
             
